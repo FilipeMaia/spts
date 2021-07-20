@@ -83,6 +83,11 @@ def estimate_background(filename_bg_cxd, bg_frames_max, filename):
 
     # Make a small report
     report_fname = filename_bg_cxd[:-4]+"_bg_report.pdf"
+    # Check if file already exists
+    report_suffix = 0
+    while(os.path.isfile(report_fname)):
+        report_fname = filename_bg_cxd[:-4]+"_bg_report_"+str(report_suffix)+".pdf"
+        report_suffix += 1
     print("Writing report to %s..." % (report_fname), end = '') 
     fig, ax = plt.subplots(2,2,figsize=(20,14))
     pos = ax[0][0].imshow(bg*good_pixels)
@@ -177,6 +182,11 @@ def estimate_flatfield(flatfield_filename, ff_frames_max, bg, good_pixels):
 
     # Make a small report
     report_fname = flatfield_filename[:-4]+"_ff_report.pdf"
+    # Check if file already exists
+    report_suffix = 0
+    while(os.path.isfile(report_fname)):
+        report_fname = flatfield_filename[:-4]+"_ff_report_"+str(report_suffix)+".pdf"
+        report_suffix += 1        
     print("Writing report to %s..." % (report_fname), end = '') 
     fig, ax = plt.subplots(2,2,figsize=(20,14))
     fig.suptitle('Flatfield report for %s' % (flatfield_filename), fontsize=16)
@@ -256,6 +266,12 @@ def guess_ROI(ff, flatfield_filename, ff_low_limit, roi_fraction):
     
     # Make a small report
     report_fname = flatfield_filename[:-4]+"_roi_report.pdf"
+    # Check if file already exists
+    report_suffix = 0
+    while(os.path.isfile(report_fname)):
+        report_fname = flatfield_filename[:-4]+"_roi_report_"+str(report_suffix)+".pdf"
+        report_suffix += 1        
+    
     print("Writing report to %s..." % (report_fname), end = '') 
     fig, ax = plt.subplots(2,2,figsize=(20,14))
     fig.suptitle('Flatfield ROI report for %s' % (flatfield_filename), fontsize=16)
@@ -420,6 +436,12 @@ def cxd_to_h5(filename_cxd,  bg, ff, roi, good_pixels, filename_cxi, do_percent_
 
     # Make a small report
     report_fname = filename_cxd[:-4]+"_report.pdf"
+    # Check if file already exists
+    report_suffix = 0
+    while(os.path.isfile(report_fname)):
+        report_fname = filename_cxd[:-4]+"_report_"+str(report_suffix)+".pdf"
+        report_suffix += 1        
+        
     print("Writing report to %s..." % (report_fname), end = '') 
 
     fig, ax = plt.subplots(2,2,figsize=(20,14))
